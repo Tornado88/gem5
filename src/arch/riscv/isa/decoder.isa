@@ -213,7 +213,7 @@ decode QUADRANT default Unknown::unknown() {
                     return std::make_shared<IllegalInstFault>(
                             "source reg x0", machInst);
                 }
-                Rc1_sw = (int32_t)(Rc1_sw + imm);
+                Rc1_sd = szext<32>((int32_t)Rc1_sd + imm);
             }});
         }
         0x2: CIOp::c_li({{
@@ -1677,7 +1677,7 @@ decode QUADRANT default Unknown::unknown() {
             0x1: decode FUNCT3 {
                 format IOp {
                     0x0: addiw({{
-                        Rd_sw = (int32_t)(Rs1_sw + imm);
+                        Rd_sd =szext<32>((int32_t)(Rs1_sw + imm));
                     }}, int32_t);
                     0x1: decode FS3 {
                         0x0: slliw({{
